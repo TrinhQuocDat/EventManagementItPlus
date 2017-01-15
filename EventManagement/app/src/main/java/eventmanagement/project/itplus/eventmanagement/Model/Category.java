@@ -7,6 +7,7 @@ package eventmanagement.project.itplus.eventmanagement.Model;
 public class Category {
     private int categoryID;
     private String name;
+    private String image;
 
     public int getCategoryID() {
         return categoryID;
@@ -14,6 +15,14 @@ public class Category {
 
     public void setCategoryID(int categoryID) {
         this.categoryID = categoryID;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getName() {

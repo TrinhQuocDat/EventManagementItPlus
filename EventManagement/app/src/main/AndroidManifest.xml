@@ -29,9 +29,15 @@
             android:name=".Activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MyApplication" />
-        <activity android:name=".Activity.AddEventActivity"
+        <activity
+            android:name=".Activity.AddEventActivity"
             android:label="@string/addEventTitle"
             android:parentActivityName=".Activity.MainActivity" />
+        <activity
+            android:name=".Activity.AddKindEventActivity"
+            android:label="@string/title_activity_add_kind_event"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".Activity.MainActivity" ></activity>
     </application>
 
 </manifest>

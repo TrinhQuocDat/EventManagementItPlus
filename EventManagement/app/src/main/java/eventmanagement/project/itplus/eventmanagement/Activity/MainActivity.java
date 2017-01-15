@@ -1,30 +1,38 @@
 package eventmanagement.project.itplus.eventmanagement.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import eventmanagement.project.itplus.eventmanagement.Adapter.EventAdapter;
+import eventmanagement.project.itplus.eventmanagement.Inteface.EventClickListener;
 import eventmanagement.project.itplus.eventmanagement.Model.Event;
 import eventmanagement.project.itplus.eventmanagement.R;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,PopupMenu.OnMenuItemClickListener {
 
+    public static int popupPosition;
+    private RecyclerView recyclerView;
+    private EventAdapter eventAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +45,25 @@ public class MainActivity extends AppCompatActivity
         events.add(new Event(1,1,"Đá bóng tại HN",1234,"Sân vận động Mỹ đình",1,"Des",true,true));
         events.add(new Event(2,2,"Cắm trại tại Hàm Lợn",222,"Sóc Sơn",1,"Des",true,true));
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.mainRecyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.mainRecyclerView);
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        EventAdapter eventAdapter = new EventAdapter(events);
+        eventAdapter = new EventAdapter(events, getApplicationContext(), new EventClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(getApplicationContext(),position+"",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPopupMenuItemClick(View view, int position) {
+                popupPosition = position;
+                showPopupMenu(view,position);
+            }
+        });
         recyclerView.setAdapter(eventAdapter);
 
 
@@ -141,7 +160,34 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
     private void goAddEventScreen() {
-        Intent i = new Intent(getApplicationContext(),AddEventActivity.class);
+        Intent i = new Intent(getApplicationContext(),AddKindEventActivity.class);
         startActivity(i);
+    }
+    /**
+     * @param view create and show popupmenu
+     */
+    public void showPopupMenu(View view, int position) {
+        popupPosition = position;
+        Context wrapper = new ContextThemeWrapper(getApplicationContext(), R.style.MyPopupMenu);
+        PopupMenu popupMenu = new PopupMenu(wrapper, view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.menu_popup, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(this);
+        popupMenu.show();
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.like:
+                Toast.makeText(getApplicationContext(),"like",Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.favorite:
+                Toast.makeText(getApplicationContext(),"favorite",Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.share:
+                return true;
+        }
+        return false;
     }
 }
