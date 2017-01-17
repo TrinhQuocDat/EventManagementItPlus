@@ -15,18 +15,6 @@ public class Event {
     private boolean status;
     private boolean kindEvent;
 
-    public Event(int eventID, int userID, String name, long time, String address, int categoryID, String description, boolean status, boolean kindEvent) {
-        this.eventID = eventID;
-        this.userID = userID;
-        this.name = name;
-        this.time = time;
-        this.address = address;
-        this.categoryID = categoryID;
-        this.description = description;
-        this.status = status;
-        this.kindEvent = kindEvent;
-    }
-
     public int getEventID() {
         return eventID;
     }
