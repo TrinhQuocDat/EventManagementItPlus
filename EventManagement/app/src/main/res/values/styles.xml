@@ -21,5 +21,9 @@
         <item name="android:popupBackground">#0F213F</item>
         <item name="android:disabledAlpha">0.5</item>
     </style>
+    <style name="ToolBarWithNavigationBack">
+        <item name="navigationIcon">@drawable/abc_ic_ab_back_material</item>
+    </style>
+
 
 </resources>

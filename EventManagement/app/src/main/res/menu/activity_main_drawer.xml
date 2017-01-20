@@ -7,6 +7,10 @@
             android:icon="@android:drawable/ic_menu_add"
             android:title="Add" />
         <item
+            android:id="@+id/nav_myEvent"
+            android:icon="@android:drawable/ic_menu_my_calendar"
+            android:title="My Event" />
+        <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Gallery" />

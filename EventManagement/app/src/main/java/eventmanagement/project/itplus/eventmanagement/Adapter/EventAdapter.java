@@ -1,6 +1,7 @@
 package eventmanagement.project.itplus.eventmanagement.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import eventmanagement.project.itplus.eventmanagement.Activity.DetailActivity;
 import eventmanagement.project.itplus.eventmanagement.Inteface.EventClickListener;
 import eventmanagement.project.itplus.eventmanagement.Model.Event;
 import eventmanagement.project.itplus.eventmanagement.R;
@@ -35,7 +37,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
 
         private ImageView imgIconEvent;
         private TextView txtNameEvent,txtTimeEvent,txtAddressEvent,txtCountLike;
-        private ImageView popupMenu;
+        private ImageButton popupMenu;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -43,7 +45,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
             txtNameEvent = (TextView) itemView.findViewById(R.id.txtNameEvent);
             txtTimeEvent = (TextView) itemView.findViewById(R.id.txtTimeEvent);
             txtAddressEvent = (TextView) itemView.findViewById(R.id.txtAddressEvent);
-            popupMenu = (ImageView) itemView.findViewById(R.id.popup_menu);
+            popupMenu = (ImageButton) itemView.findViewById(R.id.popup_menu);
             itemView.setOnClickListener(this);
             popupMenu.setOnClickListener(this);
 
@@ -53,6 +55,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
         public void onClick(View view) {
             if(view == itemView){
                 mEventClickListener.onItemClick(view,getAdapterPosition());
+                Intent i = new Intent(mContext, DetailActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(i);
+
             }else {
                 mEventClickListener.onPopupMenuItemClick(view,getAdapterPosition());
             }

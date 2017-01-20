@@ -1,6 +1,5 @@
 package eventmanagement.project.itplus.eventmanagement.Activity;
 
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,10 +27,10 @@ import eventmanagement.project.itplus.eventmanagement.Inteface.EventClickListene
 import eventmanagement.project.itplus.eventmanagement.Model.Event;
 import eventmanagement.project.itplus.eventmanagement.R;
 
-public class MainActivity extends AppCompatActivity
+public class MyEventActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,PopupMenu.OnMenuItemClickListener {
 
-    public static int popupPosition;
+    private static int popupPosition;
     private RecyclerView recyclerView;
     private EventAdapter eventAdapter;
 
@@ -43,8 +42,8 @@ public class MainActivity extends AppCompatActivity
 
         //recyclerView
         ArrayList<Event> events = new ArrayList<Event>();
-        events.add(new Event(1,1,"Đá bóng tại HN",1234,"Sân vận động Mỹ đình",1,"Des",true,true));
-        events.add(new Event(2,2,"Cắm trại tại Hàm Lợn",222,"Sóc Sơn",1,"Des",true,true));
+        events.add(new Event(1,1,"Đá bóng",1234,"Sân vận động",1,"Des",true,true));
+        events.add(new Event(2,2,"Cắm trại",222,"Sgh",1,"Des",true,true));
 
         recyclerView = (RecyclerView) findViewById(R.id.mainRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -78,7 +77,7 @@ public class MainActivity extends AppCompatActivity
         addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-        goAddEventScreen();
+                goAddEventScreen();
 
             }
         });
@@ -138,7 +137,6 @@ public class MainActivity extends AppCompatActivity
             goAddEventScreen();
         }
         else if (id == R.id.nav_myEvent) {
-            goMyEventsScreen();
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -159,10 +157,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void goMyEventsScreen() {
-        Intent i = new Intent(getApplicationContext(),MyEventActivity.class);
-        startActivity(i);
-    }
 
     private void goLoginScreen(){
         Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
@@ -181,7 +175,7 @@ public class MainActivity extends AppCompatActivity
         Context wrapper = new ContextThemeWrapper(getApplicationContext(), R.style.MyPopupMenu);
         PopupMenu popupMenu = new PopupMenu(wrapper, view);
         MenuInflater inflater = popupMenu.getMenuInflater();
-        inflater.inflate(R.menu.menu_popup, popupMenu.getMenu());
+        inflater.inflate(R.menu.my_event_menu_popup, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(this);
         popupMenu.show();
     }
@@ -189,13 +183,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.like:
-                Toast.makeText(getApplicationContext(),"like "+popupPosition,Toast.LENGTH_SHORT).show();
+            case R.id.edit:
+                Toast.makeText(getApplicationContext(),"Edit "+popupPosition,Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.favorite:
-                Toast.makeText(getApplicationContext(),"favorite "+popupPosition,Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.share:
+            case R.id.delete:
+                Toast.makeText(getApplicationContext(),"Delete "+popupPosition,Toast.LENGTH_SHORT).show();
                 return true;
         }
         return false;

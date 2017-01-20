@@ -32,12 +32,20 @@
         <activity
             android:name=".Activity.AddEventActivity"
             android:label="@string/addEventTitle"
-            android:parentActivityName=".Activity.MainActivity" />
+            android:parentActivityName=".Activity.AddKindEventActivity" />
         <activity
             android:name=".Activity.AddKindEventActivity"
             android:label="@string/title_activity_add_kind_event"
+            android:parentActivityName=".Activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.MyEventActivity"
+            android:label="@string/myEventTitle"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.DetailActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".Activity.MainActivity" ></activity>
+            ></activity>
     </application>
 
 </manifest>

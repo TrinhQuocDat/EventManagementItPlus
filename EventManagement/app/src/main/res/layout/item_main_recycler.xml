@@ -9,15 +9,23 @@
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="2dp">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
+        android:background="@drawable/shape_item_recycler"
         android:paddingBottom="3dp"
         android:paddingLeft="6dp"
         android:paddingRight="6dp"
         android:paddingTop="3dp">
 
+
+        <ImageButton
+            android:id="@+id/popup_menu"
+            android:layout_alignParentRight="true"
+            android:padding="50dp"
+            android:background="@drawable/ic_action_popup_menu"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
 
         <ImageView
             android:id="@+id/imgIconEvent"
@@ -79,12 +87,7 @@
 
 
         </LinearLayout>
-        <ImageView
-            android:id="@+id/popup_menu"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:src="@drawable/ic_action_popup_menu"
-            android:layout_alignParentRight="true"/>
+
 
     </RelativeLayout>
 
